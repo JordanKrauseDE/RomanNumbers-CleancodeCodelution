@@ -1,0 +1,35 @@
+# --- Composer ---
+/vendor/
+/composer.phar
+# Für Libraries i. d. R. NICHT committen:
+composer.lock
+
+# --- PHPUnit ---
+/.phpunit.result.cache
+/.phpunit.cache
+/coverage/
+
+# --- Static Analysis / Code Style ---
+/.php-cs-fixer.cache
+/phpstan.neon.tmp
+/phpstan/cache/
+/.psalm/cache/
+
+# --- Build/Dist/Temp ---
+/build/
+/dist/
+/tmp/
+/.cache/
+
+# --- IDE & Editor ---
+/.idea/
+/.vscode/
+/*.iml
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Env/Secrets ---
+.env
+.env.local

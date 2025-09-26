@@ -58,7 +58,7 @@ class RomanNumber implements RomanNumberContract
     {
         $romanDigits = [];
 
-        foreach ($digits as $position => $digit) {
+        foreach ($digits as $digit) {
             $romanDigit = $digit->toRoman();
             $romanDigits[] = $romanDigit;
         }

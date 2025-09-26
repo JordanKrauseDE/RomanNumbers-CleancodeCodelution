@@ -1,4 +1,5 @@
 <?php
+
 namespace RomanNumbers;
 
 use RomanNumbers\Contracts\RomanNumberContract;
@@ -10,14 +11,14 @@ use InvalidArgumentException;
 
 class RomanNumber implements RomanNumberContract
 {
-    public function __construct(){}
+    public function __construct() {}
 
     public function toRoman(int $decimalnumber): string
     {
         $this->assertRange($decimalnumber);
 
         $decimalDigits = $this->split($decimalnumber);
-        $romanParts= $this->convertToRomanDigit($decimalDigits);
+        $romanParts = $this->convertToRomanDigit($decimalDigits);
         $mergedRomanNumber = $this->mergeParts($romanParts);
 
         return $mergedRomanNumber;
@@ -25,19 +26,17 @@ class RomanNumber implements RomanNumberContract
 
     public function split(int $decimalNumber): array
     {
-    $digitClasses   = $this->digitClassesInOrder();
-    $relevantDigits = [];
+        $digitClasses   = $this->digitClassesInOrder();
+        $relevantDigits = [];
 
-    // Alle passenden Stellen einsammeln (Tsd → H → Z → E)
-    foreach ($digitClasses as $position => $digitClass) {
-        if ($digitClass::supports($decimalNumber)) {
-            $relevantDigits[] = new $digitClass($decimalNumber);
+        foreach ($digitClasses as $digitClass) {
+            if ($digitClass::supports($decimalNumber)) {
+                $relevantDigits[] = new $digitClass($decimalNumber);
+            }
         }
+
+        return $relevantDigits;
     }
-
-    return $relevantDigits; // z. B. [ThousandDigit, HundredDigit, TensDigit, SingleDigit]
-}
-
 
     public function mergeParts(array $romanParts): string
     {
@@ -46,8 +45,6 @@ class RomanNumber implements RomanNumberContract
 
     public function digitClassesInOrder(): array
     {
-        
-        // positions: 3=thousands, 2=hundreds, 1=tens, 0=ones
         return [
             3 => ThousandDigit::class,
             2 => HundredDigit::class,
@@ -68,7 +65,7 @@ class RomanNumber implements RomanNumberContract
 
         return $romanDigits;
     }
-    
+
     public function assertRange(int $number): void
     {
         if ($number < 1 || $number > 3999) {
